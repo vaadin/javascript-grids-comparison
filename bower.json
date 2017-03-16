@@ -1,0 +1,21 @@
+{
+  "name": "polymer-grids-comparison",
+  "homepage": "https://github.com/vaadin/polymer-grids-comparison",
+  "authors": [
+    "Sami Suo-Heikki <samiheikki@vaadin.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "vaadin-grid": "2.0-dev",
+    "bwt-datatable": "^1.0.5"
+  }
+}

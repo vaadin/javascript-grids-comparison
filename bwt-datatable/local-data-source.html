@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="../common/200rowdata.js"></script>
+    <link rel="import" href="../bower_components/bwt-datatable/bwt-datatable.html">
+  </head>
+  <body>
+    <paper-datatable>
+      <paper-datatable-column property="firstName">
+      </paper-datatable-column>
+      <paper-datatable-column property="lastName">
+      </paper-datatable-column>
+      <paper-datatable-column property="address">
+        <template>
+          <p style="white-space: normal">[[value.street]], [[value.city]]</p>
+        </template>
+      </paper-datatable-column>
+    </paper-datatable>
+    <script>
+      var table = document.querySelector('paper-datatable');
+      table.set('data', peopleArray200);
+    </script>
+  </body>
+</html>
