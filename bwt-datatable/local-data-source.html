@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <script src="../common/200rowdata.js"></script>
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js" charset="utf-8"></script>
     <link rel="import" href="../bower_components/bwt-datatable/bwt-datatable.html">
   </head>
   <body>
@@ -18,8 +19,10 @@
       </paper-datatable-column>
     </paper-datatable>
     <script>
-      var table = document.querySelector('paper-datatable');
-      table.set('data', peopleArray200);
+      document.addEventListener('WebComponentsReady', function() {
+        var table = document.querySelector('paper-datatable');
+        table.set('data', peopleArray200);
+      });
     </script>
   </body>
 </html>
