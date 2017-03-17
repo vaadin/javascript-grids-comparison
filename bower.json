@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "vaadin-grid": "2.0-dev",
-    "bwt-datatable": "^1.0.5"
+    "bwt-datatable": "^1.0.5",
+    "ag-grid": "^8.2.0"
   }
 }
