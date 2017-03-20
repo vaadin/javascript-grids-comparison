@@ -31,7 +31,6 @@
         grid.dataProvider = function(params, callback) {
           var xhr = new XMLHttpRequest();
           xhr.onload = function() {
-            console.log(JSON.parse(xhr.responseText).results);
             callback(JSON.parse(xhr.responseText).results);
           };
           var index = params.page * params.pageSize;
