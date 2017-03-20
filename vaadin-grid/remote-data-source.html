@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="../common/200rowdata.js"></script>
+    <script src="../common/getjson.js"></script>
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js" charset="utf-8"></script>
+    <link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
+  </head>
+  <body>
+    <vaadin-grid>
+      <vaadin-grid-column>
+        <template class="header">First Name</template>
+        <template>[[item.name.first]]</template>
+      </vaadin-grid-column>
+      <vaadin-grid-column>
+        <template class="header">Last Name</template>
+        <template>[[item.name.last]]</template>
+      </vaadin-grid-column>
+      <vaadin-grid-column>
+        <template class="header">Address</template>
+        <template>
+          <p style="white-space: normal">[[item.location.street]], [[item.location.city]]</p>
+        </template>
+      </vaadin-grid-column>
+    </vaadin-grid>
+    <script>
+      document.addEventListener('WebComponentsReady', function() {
+        var grid = document.querySelector('vaadin-grid');
+        grid.size = 1000000000; // 1 billion
+        grid.dataProvider = function(params, callback) {
+          var xhr = new XMLHttpRequest();
+          xhr.onload = function() {
+            console.log(JSON.parse(xhr.responseText).results);
+            callback(JSON.parse(xhr.responseText).results);
+          };
+          var index = params.page * params.pageSize;
+          xhr.open('GET', 'https://randomuser.me/api?index=' + index + '&results=' + params.pageSize + '&page=' + params.page, true);
+          xhr.send();
+        };
+      });
+    </script>
+  </body>
+</html>
