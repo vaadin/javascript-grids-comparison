@@ -4,17 +4,61 @@
     <meta charset="utf-8">
     <title>Polymer grids comparison</title>
   </head>
+  <style media="screen">
+    .flex-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+  </style>
   <body>
-    <h1>Polymer Grids Comparison</h1>
-    <h3><a href="#">vaadin-grid</a></h3>
-    <ul>
-      <li><a href="vaadin-grid/local-data-source.html">200 item array data source</a></li>
-      <li><a href="#">Paging remote data source</a></li>
-    </ul>
-    <h3><a href="#">bwt-datatable</a></h3>
-    <ul>
-      <li><a href="bwt-datatable/local-data-source.html">200 item array data source</a></li>
-      <li><a href="#">Paging remote data source</a></li>
-    </ul>
+    <div id="app">
+      <h1>Polymer Grids Comparison</h1>
+      <div class="flex-container">
+        <div v-for="grid in grids">
+          <h3><a :href="grid.url">{{grid.name}}</a></h3>
+          <ul>
+            <li><a :href="grid.examples.local">200 item array data source</a></li>
+            <li><a :href="grid.examples.remote">Paging remote data source</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script src="bower_components/vue/dist/vue.min.js"></script>
+    <script type="text/javascript">
+      new Vue({
+        el: '#app',
+        data: {
+          grids: [
+            {
+              name: 'vaadin-grid',
+              url: 'https://github.com/vaadin/vaadin-grid',
+              examples: {
+                local: 'vaadin-grid/local-data-source.html',
+                remote: 'vaadin-grid/remote-data-source.html'
+              }
+            },
+            {
+              name: 'bwt-datatable',
+              url: 'https://github.com/bluewatertracks/bwt-datatable',
+              examples: {
+                local: 'bwt-datatable/local-data-source.html',
+                remote: 'bwt-datatable/remote-data-source.html'
+              }
+            },
+            {
+              name: 'ag-grid',
+              url: 'https://github.com/ceolter/ag-grid',
+              examples: {
+                local: 'ag-grid/local-data-source.html',
+                remote: 'ag-grid/remote-data-source.html'
+              }
+            }
+          ]
+        }
+      });
+    </script>
+
   </body>
 </html>

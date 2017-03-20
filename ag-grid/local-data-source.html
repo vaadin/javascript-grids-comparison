@@ -9,6 +9,16 @@
   <body>
     <ag-grid style="height: 400px; display: block;" id="myGrid" class="ag-fresh"></ag-grid>
     <script>
+      function createRowData(data) {
+        return data.map(function(row) {
+          return {
+            firstName: row.firstName,
+            lastName: row.lastName,
+            address: row.address.street + ', ' + row.address.city
+          }
+        });
+      }
+
       agGrid.initialiseAgGridWithWebComponents();
 
       var columnDefs = [
@@ -19,12 +29,12 @@
 
       var gridOptions = {
         columnDefs: columnDefs,
-        rowData: peopleArray200
+        rowData: createRowData(peopleArray200)
       };
 
       // wait for the document to be loaded, otherwise
       // grid will not find the div in the document.
-      document.addEventListener("DOMContentLoaded", function() {
+      document.addEventListener('DOMContentLoaded', function() {
         var myAgileGrid = document.querySelector('#myGrid');
         myAgileGrid.setGridOptions(gridOptions);
       });
