@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="../common/200rowdata.js"></script>
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js" charset="utf-8"></script>
+		<link rel="import" href="../bower_components/bwt-datatable/bwt-datatable-card.html">
+    <link rel="import" href="../bower_components/bwt-datatable/bwt-datatable.html">
+  </head>
+  <body>
+    <paper-datatable-card data-source="{{dataSource}}" progress page-size="50">
+      <paper-datatable>
+        <paper-datatable-column property="name" header="First Name">
+          <template>
+            [[value.first]]
+          </template>
+        </paper-datatable-column>
+        <paper-datatable-column property="name" header="Last Name">
+          <template>
+            [[value.last]]
+          </template>
+        </paper-datatable-column>
+        <paper-datatable-column property="location" header="Address">
+          <template>
+            <p style="white-space: normal">[[value.street]], [[value.city]]</p>
+          </template>
+        </paper-datatable-column>
+      </paper-datatable>
+    </paper-datatable-card>
+    <script>
+      document.addEventListener('WebComponentsReady', function() {
+        var table = document.querySelector('paper-datatable-card');
+        table.dataSource = {
+          get: function(sort, page, pageSize) {
+            return new Promise(function(resolve, reject){
+              var xhr = new XMLHttpRequest();
+              xhr.onload = function() {
+                console.log(JSON.parse(xhr.responseText).results);
+                resolve(JSON.parse(xhr.responseText).results);
+              };
+              page = page - 1;
+              var index = pageSize * page;
+              xhr.open('GET', 'https://randomuser.me/api?index=' + index + '&results=' + pageSize + '&page=' + page, true);
+              xhr.send();
+            });
+          },
+  				// none of the <templates> bind in an editable way right now, but if they would this is the function
+  				// that's triggered after an edit
+  				set: function(id, property, value){
+  					console.info("a save was triggered", arguments);
+  				},
+  				length:1000000000 // 1 billion
+        }
+      });
+    </script>
+  </body>
+</html>
