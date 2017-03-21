@@ -19,6 +19,11 @@
     "bwt-datatable": "^1.0.5",
     "ag-grid": "^8.2.0",
     "paper-datatable": "^0.9.8",
-    "vue": "^2.2.4"
+    "vue": "^2.2.4",
+    "paper-progress": "^1.0.11",
+    "paper-dropdown-menu": "^1.5.0",
+    "paper-menu": "^1.2.2",
+    "iron-icons": "^1.2.0",
+    "iron-iconset-svg": "^1.1.0"
   }
 }
