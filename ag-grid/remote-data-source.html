@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="../common/200rowdata.js"></script>
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js" charset="utf-8"></script>
+    <script src="../bower_components/ag-grid/dist/ag-grid.js?ignore=notused41"></script>
+  </head>
+  <body>
+    <ag-grid style="height: 400px; display: block;" id="myGrid" class="ag-fresh"></ag-grid>
+    <script>
+    var pageSize = 50;
+      function setDataSource() {
+        var dataSource = {
+          rowCount: null,
+          getRows: function(params) {
+            var xhr = new XMLHttpRequest();
+            xhr.onload = function() {
+              params.successCallback(JSON.parse(xhr.responseText).results, -1);
+            };
+            var page = params.endRow / 50 - 1;
+            xhr.open('GET', 'https://randomuser.me/api?index=' + params.startRow + '&results=' + pageSize + '&page=' + page, true);
+            xhr.send();
+          }
+        }
+        grid.api.setDatasource(dataSource);
+      }
+
+      agGrid.initialiseAgGridWithWebComponents();
+
+      var columnDefs = [
+        {headerName: "First Name", field: "name.first"},
+        {headerName: "Last Name", field: "name.last"},
+        {headerName: "Address", field: "location.street"}
+      ];
+
+      var gridOptions = {
+        columnDefs: columnDefs,
+        rowModelType: 'virtual',
+        paginationPageSize: pageSize
+      };
+
+      // wait for the document to be loaded, otherwise
+      // grid will not find the div in the document.
+      document.addEventListener('DOMContentLoaded', function() {
+        window.grid = document.querySelector('#myGrid');
+        grid.setGridOptions(gridOptions);
+        setDataSource();
+      });
+    </script>
+  </body>
+</html>
