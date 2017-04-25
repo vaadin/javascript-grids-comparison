@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <script src="../common/200rowdata.js"></script>
+  <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" href="../bower_components/datatables.net-dt/css/jquery.dataTables.min.css">
+  <script src="../bower_components/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+  <link rel="stylesheet" href="../bower_components/datatables.net-keytable-dt/css/keyTable.dataTables.min.css">
+  <script src="../bower_components/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+  <link rel="stylesheet" href="../bower_components/datatables.net-scroller-dt/css/scroller.dataTables.min.css">
+</head>
+
+<body>
+  <table id="data-table">
+    <thead>
+      <tr>
+        <td>First Name</td>
+        <td>Last Name</td>
+        <td>Address</td>
+      </tr>
+    </thead>
+  </table>
+  <script>
+    $(document).ready(function () {
+      $('#data-table').DataTable({
+        processing: true,
+        serverSide: true,
+        scroller: true,
+        scrollY: 200,
+        keys: true,
+        'ajax': '//localhost:8080/people',
+        columns: [{
+            data: 'name.first'
+          },
+          {
+            data: 'name.last'
+          },
+          {
+            data: 'location',
+            render: function (data, type, row) {
+              return data.street + ', ' + data.city;
+            }
+          }
+        ]
+      });
+    });
+  </script>
+</body>
+
+</html>
