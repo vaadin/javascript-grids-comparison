@@ -1,15 +1,12 @@
 'use strict';
 const express = require('express');
 const app = express();
-const router = express.Router();
-
-const cors = require('cors');
 const fetch = require('node-fetch');
+const compression = require('compression');
+const PORT = 3000;
 
-// Fetch users from randomuser
-
-
-router.get('/people', (req, res) => {
+// jQuery DataTables adapter for randomuser.me 
+app.get('/people', (req, res) => {
   const query = req.query;
   const page = Math.floor(query.start / query.length);
   fetch(`https://randomuser.me/api?seed=abc&page=${page}&results=${query.length}`)
@@ -24,8 +21,8 @@ router.get('/people', (req, res) => {
     });
 });
 
-app.use(cors());
-app.use('/', router);
-app.listen(8080);
+app.use(compression());
+app.use('/', express.static('src'));
+app.listen(PORT);
 
-console.log('Server started on 8080');
+console.log(`Server started on ${PORT}`);

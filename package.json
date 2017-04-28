@@ -7,11 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "cors": "^2.8.3",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {
+    "compression": "^1.6.2",
     "express": "^4.15.2",
-    "morgan": "^1.8.1",
     "node-fetch": "^1.6.3"
   }
 }

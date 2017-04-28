@@ -27,7 +27,15 @@
   </vaadin-grid>
   <script>
     var grid = document.querySelector('vaadin-grid');
-    grid.set('items', peopleArray200);
+    // grid.set('items', peopleArray200);
+    grid.set('size', peopleArray200.length);
+    grid.set('dataProvider', function (params, callback) {
+      let startIndex = (params.pageSize * params.page);
+      let endIndex = Math.min(startIndex + params.pageSize, peopleArray200.length - 1);
+
+      console.log(`Slicing from ${startIndex} to ${endIndex}`);
+      callback(peopleArray200.slice(startIndex, endIndex));
+    });
   </script>
 </body>
 
