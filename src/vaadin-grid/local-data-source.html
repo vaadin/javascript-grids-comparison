@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <script src="../common/200rowdata.js"></script>
+  <!--<script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js" charset="utf-8"></script>-->
+  <link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
+</head>
+
+<body>
+  <vaadin-grid>
+    <vaadin-grid-column>
+      <template class="header">First Name</template>
+      <template>[[item.firstName]]</template>
+    </vaadin-grid-column>
+    <vaadin-grid-column>
+      <template class="header">Last Name</template>
+      <template>[[item.lastName]]</template>
+    </vaadin-grid-column>
+    <vaadin-grid-column>
+      <template class="header">Address</template>
+      <template>
+        <p style="white-space: normal">[[item.address.street]], [[item.address.city]]</p>
+      </template>
+    </vaadin-grid-column>
+  </vaadin-grid>
+  <script>
+    var grid = document.querySelector('vaadin-grid');
+    // grid.set('items', peopleArray200);
+    grid.set('size', peopleArray200.length);
+    grid.set('dataProvider', function (params, callback) {
+      let startIndex = (params.pageSize * params.page);
+      let endIndex = Math.min(startIndex + params.pageSize, peopleArray200.length - 1);
+
+      console.log(`Slicing from ${startIndex} to ${endIndex}`);
+      callback(peopleArray200.slice(startIndex, endIndex));
+    });
+  </script>
+</body>
+
+</html>
