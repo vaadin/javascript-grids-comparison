@@ -30,5 +30,8 @@
     "datatables.net-keytable-dt": "^2.2.1",
     "datatables.net-scroller": "^1.4.2",
     "datatables.net-scroller-dt": "^1.4.2"
+  },
+  "resolutions": {
+    "paper-styles": "^1.1.4"
   }
 }

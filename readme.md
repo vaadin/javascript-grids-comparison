@@ -6,6 +6,6 @@ Simple project showcasing the same use cases implemented with different JavaScri
 
 ```
 bower install
-npm install
+yarn install (or npm install if you don't have yarn)
 node index.js
 ```
